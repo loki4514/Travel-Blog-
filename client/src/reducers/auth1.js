@@ -4,7 +4,7 @@ import {signInApi,signUpAPi} from '../api/index.js'
 
 
 const initialState = {
-    authData1: null,
+    authData: JSON.parse(localStorage.getItem("profile")),
 };
 
 export const authSlice1 = createSlice({
@@ -12,21 +12,27 @@ export const authSlice1 = createSlice({
     initialState,
     reducers: {
         signin: (state, action) => {
-            state.authData1 = action.payload;
-            localStorage.setItem('authToken', JSON.stringify(action.payload));
+            state.authData = action.payload;
+            localStorage.setItem('profile', JSON.stringify(action.payload));
             // console.log(action.payload);
         },
         signup: (state, action) => {
-            state.authData1 = action.payload;
-            localStorage.setItem('authToken', JSON.stringify(action.payload));
+            state.authData = action.payload;
+            localStorage.setItem('profile', JSON.stringify(action.payload));
             // console.log('Handling signup action with payload:', action.payload);
             // state.authData1 = action.payload;  // Assuming action.payload is the user data
         },
+        logoutAuth1(state,action){
+            localStorage.removeItem('profile')
+            state.authData = null
+            
+            
+        }
     },
 });
 
 
-export const { signin, signup } = authSlice1.actions;
+export const { signin, signup,logoutAuth1 } = authSlice1.actions;
 export default authSlice1.reducer;
 
 

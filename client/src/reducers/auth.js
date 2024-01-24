@@ -13,11 +13,13 @@ const authSlice = createSlice({
     reducers : {
         setAuthData(state,action) {
             // if (state.authData !== null) {
-                const user_data = jwtDecode(action.payload);
+                // console.log("this is authata",state.authData)
+                // console.log("this is action",action.payload)
+                // const user_data = jwtDecode(action.payload);
             // Modify the draft state using Immer
-                state.authData = user_data;
+                state.authData = action.payload;
             // Update localStorage outside of Immer
-                localStorage.setItem('profile', JSON.stringify(user_data));
+                localStorage.setItem('profile', JSON.stringify(action.payload));
             // }
         
         },

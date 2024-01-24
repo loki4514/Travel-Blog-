@@ -61,8 +61,10 @@ export default function Auth() {
   
 
     try {
-          const cred = res.credential
-          dispatch(setAuthData(cred))
+          console.log(res)
+          const token = res.credential
+          const result = jwtDecode(token)
+          dispatch(setAuthData({token,result}))
           navigate('/')
     }catch (error){
       console.log("error dispatching", error)

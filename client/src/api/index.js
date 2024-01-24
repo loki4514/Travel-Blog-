@@ -2,6 +2,15 @@ import axios from 'axios';
 
 const API = axios.create({baseURL : 'http://localhost:5000'})
 
+// working with auth middle ware 
+
+API.interceptors.request.use((req) => {
+    if(localStorage.getItem('profile')) {
+        req.headers.Authorization =  `Bearer ${JSON.parse(localStorage.getItem('profile')).jti}`
+    }
+    return req
+})
+
 // const url = 'http://localhost:5000/posts';
 
 

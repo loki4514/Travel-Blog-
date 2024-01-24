@@ -8,6 +8,7 @@ import memories from '../../images/memories.png'
 
 import { useNavigate } from "react-router-dom";
 import { logoutAuth } from "../../reducers/auth";
+import { logoutAuth1 } from "../../reducers/auth1";
 
 
 const Navbar = () => {
@@ -18,23 +19,33 @@ const Navbar = () => {
     const location = useLocation()
 
     // const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')))
-    const user_cred = useSelector(state => state.auth.authData);
-    const [user, setUser] = useState(user_cred)
+    const user_cred_auth = useSelector(state => state.auth.authData);
+    const user_cred_auth1 = useSelector(state => state.auth1.authData);
+
+
+    const user_cred = user_cred_auth || user_cred_auth1;
+
+    const [user, setUser] = useState(user_cred?.result)
+    console.log(user_cred)
+    console.log(user, "this is user")
 
     useEffect(() => {
         // Check if user_cred exists before updating the state
+        const token = user?.token
         if (user_cred) {
-            setUser(user_cred);
+            setUser(user_cred?.result);
         }
     }, [location]);
+    console.log(user_cred)
 
 
     const logout = () => {
-        dispatch(logoutAuth())
-        navigate('/auth')
-        setUser(null)
-
-    }
+        
+        dispatch(logoutAuth());
+        dispatch(logoutAuth1());
+        navigate('/auth');
+        setUser(null);
+    };
 
 
 
