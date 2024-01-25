@@ -48,6 +48,7 @@ Welcome to the Travel Blog project! This web application is designed to allow us
   - Navigate to the Client Directory
       ```bash
       cd client
+      # install npm packages
       npm install
       npm run
 
@@ -55,13 +56,9 @@ Welcome to the Travel Blog project! This web application is designed to allow us
   - Navigate to the Server Directory:
     ```bash
       cd server
+      # install npm packages
       npm install
       npm run
-      
 
-  
-
-
-   
-  
+Open Browser to view website..
 
