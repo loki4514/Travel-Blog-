@@ -42,5 +42,26 @@ Welcome to the Travel Blog project! This web application is designed to allow us
 1. **Clone the Repository:**
    ```bash
    git clone https://github.com/your-username/travel-blog.git
-   cd travel-blog
+   cd travel-blog```
+
+  #### Clint (Frontend)
+  - Navigate to the Client Directory
+      ```bash
+      cd client
+      npm install
+      npm run
+
+  #### Server (Backend)
+  - Navigate to the Server Directory:
+    ```bash
+      cd server
+      npm install
+      npm run
+      
+
+  
+
+
+   
+  
 
