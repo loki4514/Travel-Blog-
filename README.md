@@ -37,6 +37,19 @@ Welcome to the Travel Blog project! This web application is designed to allow us
 - **Authentication:**
   - Google OAuth for secure user authentication
  
+## SnapShots
+![Screenshot (310)](https://github.com/loki4514/Travel-Blog-/assets/80893814/dde4ca78-6dd7-4c90-a0b4-0df0c996ceb7)
+
+![Screenshot (313)](https://github.com/loki4514/Travel-Blog-/assets/80893814/8e5e95c2-9ff8-445e-b8f3-b0adb044eb42)
+
+![Screenshot (314)](https://github.com/loki4514/Travel-Blog-/assets/80893814/5b9bdfb4-ecb2-44bf-b433-2fa566e3c0af)
+
+![Screenshot (315)](https://github.com/loki4514/Travel-Blog-/assets/80893814/515b2d64-f043-41bb-a854-e4284f60a7de)
+
+
+
+
+ 
 ## Getting Started
 
 1. **Clone the Repository:**
