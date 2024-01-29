@@ -25,8 +25,8 @@ export default makeStyles(() => ({
     flexDirection: 'row',
     float : 'right',
     alignItems: 'right',
-    // width: '400px',
-    justifyContent : 'space-between'
+    width: '400px',
+    justifyContent : 'flex-end'
 
   },
   profile: {

@@ -18,8 +18,8 @@ export const getPosts = async (req,res) => {
 
 export const createPost = async (req, res) => {
     // res.send('Post Creation')
-    const body = req.body;
-    const newPost = new PostMessage(body);  // Fix: Change 'post' to 'body'
+    const post = req.body;
+    const newPost = new PostMessage({...post, creator : req.userId, createdAt : new Date().toISOString()});  // Fix: Change 'post' to 'body'
     try {
         await newPost.save();
         res.status(201).json(newPost);
@@ -48,8 +48,15 @@ export const updatePost = async (req,res) => {
 
 export const deletePost = async (req,res) => {
     try {
+        if (!req.userId) return res.json({message : 'Access Denied'})
+
+
         console.log("iinside the controllers of backend lo")
+
+
         const {id} = req.params
+
+
 
         if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No post with that id")
         await PostMessage.findByIdAndDelete(id);
@@ -72,8 +79,10 @@ export const likePost = async (req,res) => {
 
         const  {id}  = req.params;
         if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No Post with that id")
-
+        
         const post = await PostMessage.findById(id);
+
+        console.log("this aboiut lokjslkflk post",post)
 
         const index  = post.likes.findIndex((id) => id === String(req.userId))
 
@@ -90,6 +99,7 @@ export const likePost = async (req,res) => {
         }
 
         // const likedPost = await PostMessage.findByIdAndUpdate(id, { likeCount: post.likeCount + 1 }, { new: true })
+        console.log("kasjfjsfdjksf jlksdfdlkjaslddfjsjlfdlklkjklslkdflk",id)
         const likedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true })
         res.json(likedPost)
 

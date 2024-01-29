@@ -32,6 +32,7 @@ export default function Auth() {
         
     } else {
       dispatch(signinauth({formData,navigate}))
+      console.log("user in the sign in received form data",formData)
 
     }
 

@@ -9,19 +9,22 @@ import jwt from 'jsonwebtoken'
 
 const authMiddleware = async (req,res,next) => {
     try {
+        console.log(req.headers.authorization,"the request hoioiuterietruithihk oioietoii headers")
         const token = req.headers.authorization.split(" ")[1];
-        const isCustomAuth = token.lenght < 500
+        const isCustomAuth = token.length < 500
 
 
         let decodedData;
 
         if (token && isCustomAuth) {
+            console.log("i'm insdie the token of iscustomauth")
             // this for jwt token 
             decodedData = jwt.verify(token,'test')
-            req.userId = decodedData?.id
+            req.userId = decodedData?.email
         } else {
+            console.log("i'm insdie the token of googleauth")
             decodedData = jwt.decode(token)
-            req.userId = decodedData?.sub
+            req.userId = decodedData?.email
 
 
 

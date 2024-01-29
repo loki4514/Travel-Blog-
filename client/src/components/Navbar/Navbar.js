@@ -5,13 +5,14 @@ import useStyles from './styles'
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import memories from '../../images/memories.png'
-
+import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { logoutAuth } from "../../reducers/auth";
 import { logoutAuth1 } from "../../reducers/auth1";
 
 
 const Navbar = () => {
+    
 
     const classes = useStyles()
     const dispatch = useDispatch()
@@ -29,16 +30,6 @@ const Navbar = () => {
     console.log(user_cred)
     console.log(user, "this is user")
 
-    useEffect(() => {
-        // Check if user_cred exists before updating the state
-        const token = user?.token
-        if (user_cred) {
-            setUser(user_cred?.result);
-        }
-    }, [location]);
-    console.log(user_cred)
-
-
     const logout = () => {
         
         dispatch(logoutAuth());
@@ -46,6 +37,23 @@ const Navbar = () => {
         navigate('/auth');
         setUser(null);
     };
+
+    useEffect(() => {
+        // Check if user_cred exists before updating the state
+        const token = user?.token
+        if (token) {
+            const decoded = jwtDecode(token)
+
+            if(decoded.exp * 1000 < new Date().getTime()) logout()
+
+            
+        }
+        setUser(user_cred?.result);
+    }, [location]);
+    console.log(user_cred)
+
+
+    
 
 
 

@@ -11,9 +11,10 @@ const Form = ({ currentId, setCurrentId }) => {
 
     const dispatch = useDispatch()
     const post = useSelector((state) => currentId ? state.posts.posts.find((p) => p._id === currentId) : null)
-
+    const user = JSON.parse(localStorage.getItem('profile'))
+    const classes = useStyles()
     const [postData, setPostData] = useState({
-        creator: '',
+        // creator: '',
         title: '',
         message: '',
         tags: '',
@@ -26,39 +27,50 @@ const Form = ({ currentId, setCurrentId }) => {
     }, [post])
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (currentId) {
-            console.log(currentId,postData)
-            dispatch(updatedPost({ id: currentId, postData }))
+        if (currentId !== null) {
+            
+            dispatch(updatedPost({ ...postData,name : user?.result?.name }))
             clear()
         }
         else {
-            dispatch(createPost(postData));
+            dispatch(createPost({...postData,name : user?.result?.name }));
             clear()
         }
 
         // Additional logic if needed
     };
 
+    if(!user?.result?.name){
+        return (
+            <Paper className={classes.paper}>
+                <Typography variant="h6" align="center">
+                    Please Sign In to create your own memories and like other's
+                </Typography>
+
+            </Paper>
+        )
+    }
+
     const clear = () => {
         setCurrentId(null)
         setPostData({
-            creator: '',
+            // creator: '',
             title: '',
             message: '',
             tags: '',
             selectedFile: ''
         });
     };
-    const classes = useStyles()
+    
     return (
         <>
             <Paper className={classes.paper}>
                 <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                     <Typography variant="h6">{currentId ? 'Editing' : 'Creating' } a Memory</Typography>
-                    <TextField name="creator" variant="outlined" label='Creator' value={postData.creator}
+                    {/* <TextField name="creator" variant="outlined" label='Creator' value={postData.creator}
                         onChange={(e) => setPostData({ ...postData, creator: e.target.value })}
                         // everytime you change creator spread the data dummy
-                        fullWidth />
+                        fullWidth /> */}
                     <TextField name="title" variant="outlined" label='Title' value={postData.title}
                         onChange={(e) => setPostData({ ...postData, title: e.target.value })}
                         // everytime you change creator spread the data dummy
